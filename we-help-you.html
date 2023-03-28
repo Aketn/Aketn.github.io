@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Background Animation</title>
+	<style>
+		.topics-bg {
+			width: 100%;
+			height: 90px;
+			background: url("https://media.discordapp.net/attachments/688789149934682315/1090280886613856436/We_help_you_unlock_your_stoppers.png?width=2758&height=88")repeat-x;
+			background-position: bottom;
+			-webkit-animation: bgroop 30s linear infinite;
+			animation: bgroop 30s linear infinite;
+		}
+
+		@-webkit-keyframes bgroop {
+			from {background-position: 0 0;}
+			to {background-position: -5000px 0;}
+		}
+
+		@keyframes bgroop {
+			from {background-position: 0 0;}
+			to {background-position: -5000px 0;}
+		}
+	</style>
+</head>
+<body>
+	<div class="topics-bg"></div>
+</body>
+</html>
