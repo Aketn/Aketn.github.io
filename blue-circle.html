@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Scrolling Circle</title>
+	<style>
+		body {
+			height: 200vh;
+			margin: 0;
+		}
+		
+		.circle {
+			width: 100px;
+			height: 100px;
+			border-radius: 50%;
+			border: 5px solid #2a67a0;
+			background-color: transparent;
+			position: fixed;
+			top: 50px;
+			left: 50px;
+			transition: border-color 1s ease-out;
+		}
+		
+		.circle.scrolled {
+			border-color: #b3336c;
+		}
+	</style>
+</head>
+<body>
+	<div class="circle"></div>
+	<script>
+		window.addEventListener('scroll', function() {
+			var circle = document.querySelector('.circle');
+			var scrolled = window.scrollY > 0;
+			if (scrolled) {
+				circle.classList.add('scrolled');
+			} else {
+				circle.classList.remove('scrolled');
+			}
+		});
+	</script>
+</body>
+</html>
