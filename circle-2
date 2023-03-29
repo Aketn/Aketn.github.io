@@ -1,0 +1,76 @@
+<html>
+<head>
+<style>
+  :root {
+    --color: blue;
+  }
+
+  .circle {
+    width: 200px;
+    height: 200px;
+    border: 20px solid var(--color);
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0);
+    position: relative;
+  }
+
+  .circle::before,
+  .circle::after {
+    content: "";
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
+    border-radius: inherit;
+    border-style: solid;
+    border-color: transparent;
+    border-width: 10px;
+  }
+
+  .circle::before {
+    border-top-color: var(--color);
+    border-right-color: var(--color);
+    animation: change-color-1 3s infinite;
+  }
+
+  .circle::after {
+    border-bottom-color: var(--color);
+    border-left-color: var(--color);
+    animation: change-color-2 3s infinite;
+  }
+
+  @keyframes change-color-1 {
+    from {
+      transform: rotate(0deg);
+      filter: hue-rotate(0deg);
+    }
+    to {
+      transform: rotate(180deg);
+      filter: hue-rotate(180deg);
+    }
+  }
+
+  @keyframes change-color-2 {
+    from {
+      transform: rotate(0deg);
+      filter: hue-rotate(180deg);
+    }
+    to {
+      transform: rotate(-180deg);
+      filter: hue-rotate(0deg);
+    }
+  }
+</style>
+</head>
+<body>
+<div class="circle"></div>
+<script>
+  window.addEventListener("scroll", function() {
+    let scroll = window.scrollY / document.body.scrollHeight; // スクロール量の割合
+    let hue = scroll * 360; // 色相の角度
+    document.documentElement.style.setProperty("--color", `hsl(${hue}, 100%, 50%)`); // カスタムプロパティに代入
+  });
+</script>
+</body>
+</html>
