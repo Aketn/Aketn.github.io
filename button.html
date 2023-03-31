@@ -23,6 +23,13 @@
       outline: none;
       cursor: pointer;
       overflow: hidden;
+      color: black; /* デフォルトのテキスト色 */
+		}
+
+		@media (prefers-color-scheme: dark) {
+			.btn {
+				color: white; /* ダークモード時のテキスト色 */
+			}
     }
    .btn::before {
       content: "";
