@@ -1,0 +1,146 @@
+<style>
+  .container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .row {
+    width: 100%;
+    height: 25%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .row:nth-child(2) {
+    top: 25%;
+  }
+
+  .row:nth-child(3) {
+    top: 50%;
+  }
+
+  .row:nth-child(4) {
+    top: 75%;
+  }
+
+  .text {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 36px;
+    white-space: nowrap;
+    animation-duration: 5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    color: black;
+  }
+
+  .text:nth-child(1) {
+    right: -100%;
+    animation-name: race-left;
+  }
+
+  .text:nth-child(2) {
+    left: -100%;
+    animation-name: race-right;
+  }
+
+  @keyframes race-left {
+    from {
+      right: -100%;
+    }
+    to {
+      right: 100%;
+    }
+  }
+
+  @keyframes race-right {
+    from {
+      left: -100%;
+    }
+    to {
+      left: 100%;
+    }
+  }
+</style>
+
+<div class="container">
+  <div class="row">
+    <div class="text">テキスト１</div>
+    <div class="text">テキスト２</div>
+  </div>
+  <div class="row">
+    <div class="text">テキスト３</div>
+    <div class="text">テキスト４</div>
+  </div>
+  <div class="row">
+    <div class="text">テキスト５</div>
+    <div class="text">テキスト６</div>
+  </div>
+  <div class="row">
+    <div class="text">テキスト７</div>
+    <div class="text">テキスト８</div>
+  </div>
+</div>
+<style>
+  @keyframes fall-down {
+    from {
+      transform: translateY(-50%);
+      opacity: 1;
+    }
+    to {
+      transform: translateY(150%);
+      opacity: 0;
+    }
+  }
+</style>
+
+<script>
+// Get all the text elements
+const texts = document.querySelectorAll(".text");
+
+// Define a function to check if two elements are overlapping
+function isOverlapping(el1, el2) {
+  const rect1 = el1.getBoundingClientRect();
+  const rect2 = el2.getBoundingClientRect();
+  
+  return !(
+    rect1.right < rect2.left ||
+    rect1.left > rect2.right ||
+    rect1.bottom < rect2.top ||
+    rect1.top > rect2.bottom
+   );
+}
+
+// Define a function to make an element fall down
+function fallDown(el) {
+   el.style.animationName = "fall-down";
+   el.style.animationDuration = "1s";
+   el.style.animationTimingFunction = "ease-in";
+   el.style.animationIterationCount = "1";
+}
+
+// Define a function to check and handle collisions
+function checkCollisions() {
+   // Loop through each pair of texts in the same row
+   for (let i = 0; i < texts.length; i += 2) {
+     const text1 = texts[i];
+     const text2 = texts[i + 1];
+     
+     // If they are overlapping, make them fall down
+     if (isOverlapping(text1, text2)) {
+       fallDown(text1);
+       fallDown(text2);
+     }
+   }
+}
+
+// Call the checkCollisions function every frame
+requestAnimationFrame(function loop() {
+   checkCollisions();
+   requestAnimationFrame(loop);
+});
+</script>
