@@ -1,0 +1,27 @@
+<div id="insert-here">
+  <span>
+    <script>
+      const databaseId = 'b2d8fccf6a4547dabc0dca97e8e90da9;
+      const propertyName = 'Total Points';
+      const aggregationType = 'sum';
+      const formatOption = { precision: 0 };
+
+      const database = await notion.databases.retrieve({ database_id: databaseId });
+      const rollupProperty = database.properties[propertyName];
+
+      const response = await notion.databases.query({
+        database_id: databaseId,
+        aggregations: [
+          {
+            property: rollupProperty.id,
+            aggregator: aggregationType,
+          },
+        ],
+      });
+
+      const result = response.results[0].aggregations[0].value;
+
+      document.write(notionUtils.formatNumber(result, formatOption));
+    </script>
+  </span>
+</div>
