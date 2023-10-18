@@ -1,0 +1,35 @@
+<html>
+<head>
+<style>
+@media (prefers-color-scheme: dark) {
+  .lounge {
+    color: white;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  .lounge {
+    color: black;
+  }
+}
+
+@keyframes move {
+  0% { transform: translateX(-100px); }
+  20% { transform: translateX(100px); }
+  40% { transform: translateX(100px) scale(1.2); }
+  60% { transform: translateX(-100px); }
+  80% { transform: translateX(-100px) scale(1.2); }
+  100% { transform: translateX(0); }
+}
+
+.lounge {
+  font-size: 36px;
+  font-weight: bold;
+  animation: move 4s forwards;
+}
+</style>
+</head>
+<body>
+<div class="lounge">lounge</div>
+</body>
+</html>
